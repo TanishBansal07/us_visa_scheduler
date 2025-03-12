@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test';
 import process from 'process';
 import { us_visa } from './us_visa_scheduler.js';
 import dotenv from 'dotenv';
-
+import { chromium } from 'playwright'
 let userEmail = process.env.USER_EMAIL;
 let userPassword = process.env.USER_PASSWORD;
 let userCountryCode = process.env.USER_COUNTRY_CODE;
@@ -16,8 +16,12 @@ console.log('USER_COUNTRY_CODE:', process.env.USER_COUNTRY_CODE);
 console.log('USER_CONSULATE:', process.env.USER_CONSULATE);
 console.log('SIGN_IN_LINK:', process.env.SIGN_IN_LINK);
 
-test('sign_in', async ({ page }) => {
+async function sign_in () {
+  
+  const browser = await chromium.launch({ headless: false }); // Set headless to false if you want to see the browser
+  const page = await browser.newPage();
   let visa = new us_visa(signInLink, userEmail, userPassword, userCountryCode, userConsulate);
   await visa.sign_in(page);
   await visa.go_to_appointment_page(page);
-});
+};
+sign_in()
