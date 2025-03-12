@@ -1,0 +1,17 @@
+{
+  "name": "us_visa_scheduler",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000u\u0000s\u0000_\u0000v\u0000i\u0000s\u0000a\u0000_\u0000s\u0000c\u0000h\u0000e\u0000d\u0000u\u0000l\u0000e\u0000r\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.51.0",
+    "@types/node": "^22.13.10"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
+}
