@@ -23,51 +23,8 @@ async function sign_in () {
   let visa = new us_visa(signInLink, userEmail, userPassword, userCountryCode, userConsulate);
   await visa.sign_in(page);
   await visa.go_to_appointment_page(page);
-  const response = await context.request.get(
-    'https://ais.usvisa-info.com/en-ca/niv/schedule/66236035/appointment/days/95.json?appointments[expedite]=false',
-    {
-      headers: {
-        accept: 'application/json, text/javascript, */*; q=0.01',
-        'accept-language': 'en-US,en;q=0.9',
-        'sec-ch-ua': '"Not:A-Brand";v="24", "Chromium";v="134"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Windows"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-origin',
-    
-        'x-requested-with': 'XMLHttpRequest',
-        Referer: 'https://ais.usvisa-info.com/en-ca/niv/schedule/66236035/appointment',
-        'Referrer-Policy': 'strict-origin-when-cross-origin',
-      },
-    }
-  );
-  let date = await response.json();
-  date = date[0].date;
-  console.log(date);
-  const respons = await context.request.get(
-    `https://ais.usvisa-info.com/en-ca/niv/schedule/66236035/appointment/times/95.json?date=${date}appointments[expedite]=false`,
-    {
-      headers: {
-        accept: 'application/json, text/javascript, */*; q=0.01',
-        'accept-language': 'en-US,en;q=0.9',
-        'if-none-match': 'W/"62dd646c2a044710db761d074d0c5953"',
-        'sec-ch-ua': '"Not:A-Brand";v="24", "Chromium";v="134"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Windows"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-origin',
-        'x-csrf-token': '9jmEwwf+43hJuCDBe18Cwk26kHzyKx1ZIEpJ2S7SZeHVQSFu449RJIezch6X9ir+6yejfh+/RFvapzHhoqIMsA==',
-        'x-requested-with': 'XMLHttpRequest',
-        Referer: 'https://ais.usvisa-info.com/en-ca/niv/schedule/66236035/appointment',
-        'Referrer-Policy': 'strict-origin-when-cross-origin',
-      },
-    }
-  );
-  let time = await respons.json();
-  time = time.available_times[0];
-  console.log(time);
+  let latest_date = await visa.get_available_dates(page);
+  let time = await visa.get_available_times(page, latest_date);
 };
 
 sign_in()
