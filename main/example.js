@@ -9,6 +9,11 @@ let userPassword = process.env.USER_PASSWORD;
 let userCountryCode = process.env.USER_COUNTRY_CODE;
 let userConsulate = process.env.USER_CONSULATE;
 let signInLink = process.env.SIGN_IN_LINK;
+let maxSessions= process.env.MAX_SESSIONS;
+let retryPerSession = process.env.RETRY_PER_SESSION;
+let maxTime =process.env.MAX_TIME;
+let retryDelay=process.env.RETRY_DELAY;
+let sessionDelay = process.env.SESSION_DELAY;
 console.log('USER_EMAIL:', process.env.USER_EMAIL);
 console.log('USER_PASSWORD:', process.env.USER_PASSWORD);
 console.log('USER_COUNTRY_CODE:', process.env.USER_COUNTRY_CODE);
@@ -33,7 +38,7 @@ async function sign_in () {
   setTimeout(() => {}, 5000);
 //   let response = await page.request.post('https://ais.usvisa-info.com/en-ca/niv/schedule/66236035/appointment', {
 //   headers: {
-//       "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+//       accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
 //       "accept-language": "en-US,en;q=0.9",
 //       "cache-control": "max-age=0",
 //       "content-type": "application/x-www-form-urlencoded",
@@ -45,7 +50,7 @@ async function sign_in () {
 //       "sec-fetch-site": "same-origin",
 //       "sec-fetch-user": "?1",
 //       "upgrade-insecure-requests": "1",
-//       "Referer": "https://ais.usvisa-info.com/en-ca/niv/schedule/66236035/appointment",
+//       Referer: "https://ais.usvisa-info.com/en-ca/niv/schedule/66236035/appointment",
 //       "Referrer-Policy": "strict-origin-when-cross-origin"
 //   },
 //   form: {
