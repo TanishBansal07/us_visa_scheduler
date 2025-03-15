@@ -43,7 +43,7 @@ class us_visa {
     );
     let data = await available_dates.json();
     let latest_date = data[0].date;
-    console.log(latest_date);
+    // console.log(latest_date);
     return latest_date;
   }
   async get_available_times(page,latest_date) {
@@ -68,7 +68,7 @@ class us_visa {
     );
     let time = await available_times.json();
     time = time.available_times[0];
-    console.log(time);
+    // console.log(time);
     return time;
   }
 }
